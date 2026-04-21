@@ -32,7 +32,7 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private RoleName role;
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Reservation> reservation;
 
