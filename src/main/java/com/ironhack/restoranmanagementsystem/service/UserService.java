@@ -12,7 +12,6 @@ import com.ironhack.restoranmanagementsystem.enums.RoleName;
 import com.ironhack.restoranmanagementsystem.mapper.OrderMapper;
 import com.ironhack.restoranmanagementsystem.mapper.ReservationMapper;
 import com.ironhack.restoranmanagementsystem.mapper.UserMapper;
-import com.ironhack.restoranmanagementsystem.repository.ReservationRepository;
 import com.ironhack.restoranmanagementsystem.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
