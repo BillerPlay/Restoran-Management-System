@@ -1,5 +1,6 @@
-package com.ironhack.restoranmanagementsystem.repository;
+package com.ironhack.restoranmanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class RestaurantTable {
     private boolean isAvailable;
 
     @OneToMany(mappedBy ="restaurantTable")
-    private List<Reservation>reservations;
+    @JsonIgnore
+    private List<Reservation> reservations;
+
     public RestaurantTable(){}
 
     public Long getId() {

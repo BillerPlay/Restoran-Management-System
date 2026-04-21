@@ -1,11 +1,14 @@
-package com.ironhack.restoranmanagementsystem.repository;
+package com.ironhack.restoranmanagementsystem.entity;
 
 import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
 import jakarta.persistence.*;
 
+import com.ironhack.restoranmanagementsystem.entity.User;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,13 +19,14 @@ public class Reservation {
     private  int guestCount;
     @Column
     private ReservationStatus status;
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     @Column
     private LocalDate createdAt;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "restaurant_table")
     private RestaurantTable restaurantTable;
 
     public Reservation(){}
