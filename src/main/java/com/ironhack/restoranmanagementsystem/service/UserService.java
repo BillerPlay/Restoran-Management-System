@@ -10,6 +10,7 @@ import com.ironhack.restoranmanagementsystem.entity.Reservation;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.RoleName;
 import com.ironhack.restoranmanagementsystem.mapper.OrderMapper;
+import com.ironhack.restoranmanagementsystem.exception.ResourceNotFoundException;
 import com.ironhack.restoranmanagementsystem.mapper.UserMapper;
 import com.ironhack.restoranmanagementsystem.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,7 +61,7 @@ public class UserService {
     public UserResponse findByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new RuntimeException("User not found: " + email));
+                        new ResourceNotFoundException("User not found: " + email));
 
         return UserMapper.toResponse(user);
     }
@@ -68,12 +69,12 @@ public class UserService {
     public User getByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new RuntimeException("User not found: " + email));
+                        new ResourceNotFoundException("User not found: " + email));
     }
 
     public List<ReservationResponse> getMyReservations(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found: " + email));
 
         List<Reservation> reservations = reservationRepository.findByUser(user);
 
@@ -82,7 +83,7 @@ public class UserService {
 
     public List<OrderResponse> getMyReservations(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
 
         List<Order> orders = reservationRepository.findByUser(user);
 
