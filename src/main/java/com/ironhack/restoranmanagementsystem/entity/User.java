@@ -11,9 +11,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="users")
 public class User extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "full_name", length = 50, nullable = false)
     private String fullName;
@@ -42,14 +39,6 @@ public class User extends BaseEntity{
     private List<Order> order;
 
     public User() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFullName() {
