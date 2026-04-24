@@ -1,5 +1,4 @@
 package com.ironhack.restoranmanagementsystem.controller;
-
 import com.ironhack.restoranmanagementsystem.dto.request.LoginRequest;
 import com.ironhack.restoranmanagementsystem.dto.request.RegisterRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.AuthResponse;

@@ -1,0 +1,51 @@
+package com.ironhack.restoranmanagementsystem.controller;
+import com.ironhack.restoranmanagementsystem.dto.request.ReservationUpdateRequest;
+import com.ironhack.restoranmanagementsystem.dto.response.ReservationResponse;
+import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
+import com.ironhack.restoranmanagementsystem.service.ReservationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/reservation")
+public class ReservationController {
+public final ReservationService reservationService;
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+    @GetMapping
+    public List<ReservationResponse>getAll(){
+        return reservationService.getAllReservations();
+    }
+    @GetMapping("/{id}")
+    public ReservationResponse getById(@PathVariable Long id){
+        return reservationService.getById(id);
+    }
+    @GetMapping("/user/{userId}")
+    public List<ReservationResponse>getMyReservations(@PathVariable Long userId){
+        return reservationService.getMyReservations(userId);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+    }
+
+    @PutMapping("/{id}")
+    public ReservationResponse update(@PathVariable Long id, @RequestBody ReservationUpdateRequest request){
+        return reservationService.updateReservation(id, request);
+    }
+ @GetMapping("/status")
+    public ResponseEntity<List<ReservationResponse>>getByStatus(@RequestParam ReservationStatus status){
+        return ResponseEntity.ok(reservationService.getReservationByStatus(status));
+    }
+    @GetMapping("/user/{userId}/ordered")
+    public List<ReservationResponse>getByUserIdOrdered(@PathVariable Long userId){
+        return reservationService.getByUserIdOrderByTime(userId);}
+    @GetMapping("/min_guests")
+    public List<ReservationResponse>getByMinGuests(@RequestParam int count){
+        return reservationService.getByMinGuestCount(count);
+    }
+}
