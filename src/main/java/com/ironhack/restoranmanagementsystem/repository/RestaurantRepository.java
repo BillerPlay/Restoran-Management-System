@@ -1,6 +1,7 @@
 package com.ironhack.restoranmanagementsystem.repository;
 
 import com.ironhack.restoranmanagementsystem.entity.RestaurantTable;
+import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface RestaurantRepository extends JpaRepository<RestaurantTable,Long> {
     Optional<RestaurantTable> findByTableNumber(int tableNumber);
-    List<RestaurantTable> findAllByAvailable(Boolean available);
+    List<RestaurantTable> findAllByAvailable(boolean status);
     List<RestaurantTable> findByCapacityGreaterThanEqual(int capacity);
 }

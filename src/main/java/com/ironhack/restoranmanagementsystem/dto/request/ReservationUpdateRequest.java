@@ -20,7 +20,7 @@ public class ReservationUpdateRequest {
         this.reservationTime = reservationTime;
     }
 
-    public Integer getGuestCount() {
+    public int getGuestCount() {
         return guestCount;
     }
 

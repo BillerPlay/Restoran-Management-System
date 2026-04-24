@@ -1,5 +1,4 @@
 package com.ironhack.restoranmanagementsystem.service;
-
 import com.ironhack.restoranmanagementsystem.dto.request.RegisterRequest;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.RoleName;
@@ -8,7 +7,6 @@ import com.ironhack.restoranmanagementsystem.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 @Service
 public class AuthService {
     private final UserRepository userRepository;
