@@ -3,48 +3,48 @@ import com.ironhack.restoranmanagementsystem.dto.request.TableCreateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.TableResponse;
 import com.ironhack.restoranmanagementsystem.entity.RestaurantTable;
 import com.ironhack.restoranmanagementsystem.mapper.RestaurantTableMapper;
-import com.ironhack.restoranmanagementsystem.repository.RestaurantRepository;
+import com.ironhack.restoranmanagementsystem.repository.RestaurantTableRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
-public class RestaurantService {
-    private final RestaurantRepository restaurantRepository;
+public class RestaurantTableService {
+    private final RestaurantTableRepository restaurantTableRepository;
 
-    public RestaurantService(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
+    public RestaurantTableService(RestaurantTableRepository restaurantTableRepository) {
+        this.restaurantTableRepository = restaurantTableRepository;
     }
     public TableResponse createTable(TableCreateRequest request){
         RestaurantTable table=new RestaurantTable();
         table.setTableNumber(request.getTableNumber());
         table.setCapacity(request.getCapacity());
         table.setAvailable(request.getAvailable());
-        RestaurantTable savedTable=restaurantRepository.save(table);
+        RestaurantTable savedTable=restaurantTableRepository.save(table);
         return RestaurantTableMapper.toResponse(savedTable);
     }
     public TableResponse updateTable(Long id,TableCreateRequest request){
-        RestaurantTable table=restaurantRepository.findById(id)
+        RestaurantTable table=restaurantTableRepository.findById(id)
                 .orElseThrow(() ->new RuntimeException("Table not found"));
         table.setCapacity(request.getCapacity());
         table.setAvailable(request.getAvailable());
-        RestaurantTable updatedTable=restaurantRepository.save(table);
+        RestaurantTable updatedTable=restaurantTableRepository.save(table);
         return RestaurantTableMapper.toResponse(updatedTable);
     }
     public void deleteTable(Long id){
-        if(!restaurantRepository.existsById(id)){
+        if(!restaurantTableRepository.existsById(id)){
             throw new RuntimeException("Table to be deleted not found");
-        }        restaurantRepository.deleteById(id);
+        }        restaurantTableRepository.deleteById(id);
     }
     public TableResponse findTableNumber(int tableNumber){
-        RestaurantTable table=restaurantRepository.findByTableNumber(tableNumber)
+        RestaurantTable table=restaurantTableRepository.findByTableNumber(tableNumber)
                 .orElseThrow(()->new RuntimeException("Table number not found:"+tableNumber));
         return RestaurantTableMapper.toResponse(table);
     }
     public List<TableResponse>findAllAvailables(boolean status){
-       List<RestaurantTable>tables=restaurantRepository.findAllByIsAvailable(status);
+       List<RestaurantTable>tables=restaurantTableRepository.findAllByIsAvailable(status);
         return RestaurantTableMapper.toResponseList(tables);
     }
     public List<TableResponse> getTablesByMinCapacity(int capacity){
-       List<RestaurantTable>tables=restaurantRepository.findByCapacityGreaterThanEqual(capacity);
+       List<RestaurantTable>tables=restaurantTableRepository.findByCapacityGreaterThanEqual(capacity);
         return RestaurantTableMapper.toResponseList(tables);
     }
 }
