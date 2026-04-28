@@ -26,7 +26,7 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final RestaurantTableRepository restaurantTableRepository;
 
-    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, RestaurantTableService restaurantTableService, RestaurantTableRepository restaurantTableRepository) {
+    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository,   RestaurantTableRepository restaurantTableRepository) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.restaurantTableRepository = restaurantTableRepository;
