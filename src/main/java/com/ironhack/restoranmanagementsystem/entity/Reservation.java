@@ -1,10 +1,8 @@
 package com.ironhack.restoranmanagementsystem.entity;
 
-import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
 import jakarta.persistence.*;
 
-import com.ironhack.restoranmanagementsystem.entity.User;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -35,6 +33,11 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = false)
     private RestaurantTable restaurantTable;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDate.now();
+    }
 
     public Reservation(){}
 

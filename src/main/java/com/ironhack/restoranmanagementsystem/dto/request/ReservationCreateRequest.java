@@ -13,7 +13,7 @@ public class ReservationCreateRequest {
 
     @NotNull(message = "Guest count is required")
     @Min(value = 1, message = "Guest count must be at least 1")
-    private int guestCount;
+    private Integer guestCount;
 
     @NotNull(message = "Table ID is required")
     private Long restaurantTableId;
@@ -26,11 +26,11 @@ public class ReservationCreateRequest {
         this.reservationTime = reservationTime;
     }
 
-    public int getGuestCount() {
+    public Integer getGuestCount() {
         return guestCount;
     }
 
-    public void setGuestCount(int guestCount) {
+    public void setGuestCount(Integer guestCount) {
         this.guestCount = guestCount;
     }
 

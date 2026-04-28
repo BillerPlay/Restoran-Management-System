@@ -7,7 +7,7 @@ public class ReservationUpdateRequest {
     @Future(message = "Reservation time must be in the future")
     private LocalDateTime reservationTime;
     @Min(value = 1, message = "Guest count must be at least 1")
-    private int guestCount;
+    private Integer guestCount;
     private Long restaurantTableId;
 
     public LocalDateTime getReservationTime() {
@@ -18,7 +18,7 @@ public class ReservationUpdateRequest {
         this.reservationTime = reservationTime;
     }
 
-    public int getGuestCount() {
+    public Integer getGuestCount() {
         return guestCount;
     }
 
