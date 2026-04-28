@@ -55,12 +55,18 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.confirmReservation(id));
     }
 
-    //must delete
-//    @PatchMapping("/{id}/cancel")
-//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-//    public ResponseEntity<ReservationResponse> cancelReservation(@PathVariable Long id) {
-//        return ResponseEntity.ok(reservationService.cancelReservation(id));
-//    }
+    @PatchMapping("/{id}/cancel")
+    @PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+    public ResponseEntity<ReservationResponse> cancelReservation(
+            @PathVariable Long id,
+            @AuthenticationPrincipal String email,
+            Authentication authentication) {
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        return ResponseEntity.ok(reservationService.cancelReservation(id, email, isAdmin));
+    }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
