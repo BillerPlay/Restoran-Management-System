@@ -1,6 +1,6 @@
 package com.ironhack.restoranmanagementsystem.controller;
 import com.ironhack.restoranmanagementsystem.dto.request.LoginRequest;
-import com.ironhack.restoranmanagementsystem.dto.request.RegisterRequest;
+import com.ironhack.restoranmanagementsystem.dto.request.UserRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.AuthResponse;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.security.JwtTokenProvider;
@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserRequest request) {
         User user = authService.register(request);
 
         String token = jwtTokenProvider.generateToken(

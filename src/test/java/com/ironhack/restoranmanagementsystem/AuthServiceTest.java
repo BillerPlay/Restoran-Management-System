@@ -1,6 +1,6 @@
 package com.ironhack.restoranmanagementsystem;
 
-import com.ironhack.restoranmanagementsystem.dto.request.RegisterRequest;
+import com.ironhack.restoranmanagementsystem.dto.request.UserRequest;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.RoleName;
 import com.ironhack.restoranmanagementsystem.exception.ConflictException;
@@ -33,12 +33,11 @@ class AuthServiceTest {
 
     @Test
     void shouldRegisterUserSuccessfully() {
-        RegisterRequest request = new RegisterRequest();
+        UserRequest request = new UserRequest();
         request.setFullName("Test User");
         request.setEmail("test@mail.com");
         request.setPassword("123456");
         request.setPhoneNumber("123456789");
-        request.setRole("customer");
 
         when(userRepository.existsByEmail("test@mail.com")).thenReturn(false);
         when(passwordEncoder.encode("123456")).thenReturn("encoded_pass");
@@ -58,7 +57,7 @@ class AuthServiceTest {
 
     @Test
     void shouldThrowConflictWhenEmailAlreadyExists() {
-        RegisterRequest request = new RegisterRequest();
+        UserRequest request = new UserRequest();
         request.setEmail("test@mail.com");
 
         when(userRepository.existsByEmail("test@mail.com")).thenReturn(true);
@@ -68,38 +67,6 @@ class AuthServiceTest {
         );
 
         verify(userRepository, never()).save(any());
-    }
-
-    @Test
-    void shouldSetDefaultRoleWhenRoleIsNull() {
-        RegisterRequest request = new RegisterRequest();
-        request.setEmail("test@mail.com");
-        request.setPassword("123456");
-        request.setRole(null);
-
-        when(userRepository.existsByEmail(any())).thenReturn(false);
-        when(passwordEncoder.encode(any())).thenReturn("encoded");
-        when(userRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
-
-        User result = authService.register(request);
-
-        assertEquals(RoleName.CUSTOMER, result.getRole());
-    }
-
-    @Test
-    void shouldSetAdminRoleWhenRoleIsAdmin() {
-        RegisterRequest request = new RegisterRequest();
-        request.setEmail("admin@mail.com");
-        request.setPassword("123456");
-        request.setRole("admin");
-
-        when(userRepository.existsByEmail(any())).thenReturn(false);
-        when(passwordEncoder.encode(any())).thenReturn("encoded");
-        when(userRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
-
-        User result = authService.register(request);
-
-        assertEquals(RoleName.ADMIN, result.getRole());
     }
 
     @Test

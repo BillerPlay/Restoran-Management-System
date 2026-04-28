@@ -27,6 +27,8 @@ public class UserUpdateRequest {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
+    private String role;
+
     public UserUpdateRequest() {
     }
 
@@ -62,4 +64,11 @@ public class UserUpdateRequest {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

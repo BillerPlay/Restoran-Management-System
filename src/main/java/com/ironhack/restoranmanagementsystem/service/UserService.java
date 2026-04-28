@@ -1,6 +1,7 @@
 package com.ironhack.restoranmanagementsystem.service;
 
 import com.ironhack.restoranmanagementsystem.dto.request.UserCreateRequest;
+import com.ironhack.restoranmanagementsystem.dto.request.UserUpdateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.OrderResponse;
 import com.ironhack.restoranmanagementsystem.dto.response.ReservationResponse;
 import com.ironhack.restoranmanagementsystem.dto.response.UserResponse;
@@ -96,6 +97,23 @@ public class UserService {
             role = RoleName.valueOf(request.getRole().toUpperCase());
         }
 
+        user.setRole(role);
+
+        return userRepository.save(user);
+    }
+
+    public User updateUser(Long id, UserUpdateRequest request){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        RoleName role = RoleName.CUSTOMER;
+        if (request.getRole() != null) {
+            role = RoleName.valueOf(request.getRole().toUpperCase());
+        }
         user.setRole(role);
 
         return userRepository.save(user);

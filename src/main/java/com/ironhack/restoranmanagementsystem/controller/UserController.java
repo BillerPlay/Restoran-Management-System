@@ -1,12 +1,14 @@
 package com.ironhack.restoranmanagementsystem.controller;
 
 import com.ironhack.restoranmanagementsystem.dto.request.UserCreateRequest;
+import com.ironhack.restoranmanagementsystem.dto.request.UserUpdateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.OrderResponse;
 import com.ironhack.restoranmanagementsystem.dto.response.ReservationResponse;
 import com.ironhack.restoranmanagementsystem.dto.response.UserResponse;
 import com.ironhack.restoranmanagementsystem.dto.response.UserSummary;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -54,8 +56,19 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public UserResponse createUser(@RequestBody UserCreateRequest request){
+    public UserResponse createUser(@Valid @RequestBody UserCreateRequest request){
         User user =  userService.createUser(request);
+        return new UserResponse(
+                user.getId(),
+                user.getFullName(),
+                user.getEmail(),
+                user.getPhoneNumber()
+        );
+    }
+    @PutMapping("/{id}}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public UserResponse updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request){
+        User user =  userService.updateUser(id, request);
         return new UserResponse(
                 user.getId(),
                 user.getFullName(),

@@ -1,5 +1,5 @@
 package com.ironhack.restoranmanagementsystem.service;
-import com.ironhack.restoranmanagementsystem.dto.request.RegisterRequest;
+import com.ironhack.restoranmanagementsystem.dto.request.UserRequest;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.RoleName;
 import com.ironhack.restoranmanagementsystem.exception.ConflictException;
@@ -24,7 +24,7 @@ public class AuthService {
                         new ResourceNotFoundException("User not found: " + email));
     }
     @Transactional
-    public User register(RegisterRequest request) {
+    public User register(UserRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new ConflictException(
@@ -38,9 +38,6 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         RoleName role = RoleName.CUSTOMER;
-        if (request.getRole() != null) {
-            role = RoleName.valueOf(request.getRole().toUpperCase());
-        }
 
         user.setRole(role);
 
