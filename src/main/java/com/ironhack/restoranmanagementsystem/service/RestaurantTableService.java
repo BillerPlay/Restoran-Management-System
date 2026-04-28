@@ -2,6 +2,7 @@ package com.ironhack.restoranmanagementsystem.service;
 import com.ironhack.restoranmanagementsystem.dto.request.TableCreateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.TableResponse;
 import com.ironhack.restoranmanagementsystem.entity.RestaurantTable;
+import com.ironhack.restoranmanagementsystem.exception.ResourceNotFoundException;
 import com.ironhack.restoranmanagementsystem.mapper.RestaurantTableMapper;
 import com.ironhack.restoranmanagementsystem.repository.RestaurantTableRepository;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,15 @@ public class RestaurantTableService {
         RestaurantTable savedTable=restaurantTableRepository.save(table);
         return RestaurantTableMapper.toResponse(savedTable);
     }
-    public TableResponse updateTable(Long id,TableCreateRequest request){
-        RestaurantTable table=restaurantTableRepository.findById(id)
-                .orElseThrow(() ->new RuntimeException("Table not found"));
+    public TableResponse updateTable(Long id, TableCreateRequest request) {
+        RestaurantTable table = restaurantTableRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Table not found: " + id));
+
+        table.setTableNumber(request.getTableNumber());
         table.setCapacity(request.getCapacity());
         table.setAvailable(request.getAvailable());
-        RestaurantTable updatedTable=restaurantTableRepository.save(table);
-        return RestaurantTableMapper.toResponse(updatedTable);
+
+        return RestaurantTableMapper.toResponse(restaurantTableRepository.save(table));
     }
     public void deleteTable(Long id){
         if(!restaurantTableRepository.existsById(id)){
