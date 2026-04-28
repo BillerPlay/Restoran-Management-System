@@ -4,6 +4,7 @@ import com.ironhack.restoranmanagementsystem.dto.request.TableCreateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.TableResponse;
 import com.ironhack.restoranmanagementsystem.service.RestaurantTableService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,9 @@ public class RestaurantTableController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteTable(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTable(@PathVariable Long id) {
         restaurantTableService.deleteTable(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/status")

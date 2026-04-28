@@ -70,8 +70,9 @@ public class ReservationController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         reservationService.deleteReservation(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
