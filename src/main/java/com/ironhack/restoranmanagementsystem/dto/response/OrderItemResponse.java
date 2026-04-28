@@ -1,13 +1,18 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class OrderItemResponse {
 
     private Long id;
     private int quantity;
+    @JsonProperty("unit_price")
     private BigDecimal unitPrice;
+    @JsonProperty("product_id")
     private Long productId;
+    @JsonProperty("product_name")
     private String productName;
 
     public OrderItemResponse() {}

@@ -1,4 +1,4 @@
-package com.ironhack.restoranmanagementsystem.service;
+package com.ironhack.restoranmanagementsystem;
 
 
 import com.ironhack.restoranmanagementsystem.dto.request.CategoryCreateRequest;
@@ -7,6 +7,7 @@ import com.ironhack.restoranmanagementsystem.entity.Category;
 import com.ironhack.restoranmanagementsystem.exception.ConflictException;
 import com.ironhack.restoranmanagementsystem.exception.ResourceNotFoundException;
 import com.ironhack.restoranmanagementsystem.repository.CategoryRepository;
+import com.ironhack.restoranmanagementsystem.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -4,6 +4,8 @@ import com.ironhack.restoranmanagementsystem.config.SecurityConfig;
 import com.ironhack.restoranmanagementsystem.controller.RestaurantTableController;
 import com.ironhack.restoranmanagementsystem.dto.request.TableCreateRequest;
 import com.ironhack.restoranmanagementsystem.dto.response.TableResponse;
+import com.ironhack.restoranmanagementsystem.exception.CustomAccessDeniedHandler;
+import com.ironhack.restoranmanagementsystem.exception.CustomAuthenticationEntryPoint;
 import com.ironhack.restoranmanagementsystem.security.JwtTokenProvider;
 import com.ironhack.restoranmanagementsystem.service.RestaurantTableService;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(RestaurantTableController.class)
 @AutoConfigureMockMvc
-@Import({SecurityConfig.class, JacksonAutoConfiguration.class})
+@Import({SecurityConfig.class, CustomAccessDeniedHandler.class, CustomAuthenticationEntryPoint.class})
 public class RestaurantTableControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -56,7 +58,7 @@ public class RestaurantTableControllerTest {
                         .content(objectMapper.writeValueAsString(tableRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.tableNumber").value(5));
+                .andExpect(jsonPath("$.table_number").value(5));
     }
     @Test
     @WithMockUser(roles = "USER")
@@ -85,7 +87,7 @@ public class RestaurantTableControllerTest {
 
         mockMvc.perform(delete("/api/restaurant/1")
                         .with(csrf()))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
         Mockito.verify(restaurantTableService, Mockito.times(1)).deleteTable(1L);
     }
     @Test
@@ -103,6 +105,6 @@ public class RestaurantTableControllerTest {
                 .thenReturn(tableResponse);
         mockMvc.perform(get("/api/restaurant/number/5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.tableNumber").value(5));
+                .andExpect(jsonPath("$.table_number").value(5));
     }
 }

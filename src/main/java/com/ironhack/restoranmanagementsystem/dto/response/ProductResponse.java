@@ -1,5 +1,7 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class ProductResponse {
@@ -9,7 +11,9 @@ public class ProductResponse {
     private String description;
     private BigDecimal price;
     private Boolean available;
+    @JsonProperty("category_id")
     private Long categoryId;
+    @JsonProperty("category_name")
     private String categoryName;
 
     public ProductResponse() {}

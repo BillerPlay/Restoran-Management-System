@@ -1,7 +1,10 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserSummary {
     private final Long id;
+    @JsonProperty("full_name")
     private final String fullName;
     private final String email;
 

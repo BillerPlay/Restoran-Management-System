@@ -10,13 +10,17 @@ import com.ironhack.restoranmanagementsystem.dto.response.UserSummary;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.OrderStatus;
 import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
+import com.ironhack.restoranmanagementsystem.exception.CustomAccessDeniedHandler;
+import com.ironhack.restoranmanagementsystem.exception.CustomAuthenticationEntryPoint;
 import com.ironhack.restoranmanagementsystem.security.JwtTokenProvider;
 import com.ironhack.restoranmanagementsystem.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,7 +35,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
-@Import(SecurityConfig.class)
+@Import({
+        SecurityConfig.class,
+        CustomAuthenticationEntryPoint.class,
+        CustomAccessDeniedHandler.class
+})
 class UserControllerTest {
 
     @Autowired
@@ -43,7 +51,6 @@ class UserControllerTest {
     @MockitoBean
     private JwtTokenProvider jwtTokenProvider;
 
-
     @Test
     @WithMockUser(username = "test@mail.com")
     void shouldReturnCurrentUser() throws Exception {
@@ -54,7 +61,7 @@ class UserControllerTest {
         mockMvc.perform(get("/api/users/me"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("test@mail.com"))
-                .andExpect(jsonPath("$.fullName").value("Test User"));
+                .andExpect(jsonPath("$.full_name").value("Test User"));
     }
 
     @Test
@@ -86,9 +93,9 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].guestCount").value(2))
+                .andExpect(jsonPath("$[0].guest_count").value(2))
                 .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].guestCount").value(4));
+                .andExpect(jsonPath("$[1].guest_count").value(4));
     }
 
     @Test
@@ -184,9 +191,9 @@ class UserControllerTest {
 
         String requestBody = """
                 {
-                    "fullName": "New User",
+                    "full_name": "New User",
                     "email": "new@mail.com",
-                    "phoneNumber": "987654321",
+                    "phone_number": "987654321",
                     "password": "secret"
                 }
                 """;
@@ -196,7 +203,7 @@ class UserControllerTest {
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("new@mail.com"))
-                .andExpect(jsonPath("$.fullName").value("New User"));
+                .andExpect(jsonPath("$.full_name").value("New User"));
 
         verify(userService).createUser(any(UserCreateRequest.class));
     }
@@ -206,9 +213,9 @@ class UserControllerTest {
     void shouldReturnForbiddenForCreateWhenNotAdmin() throws Exception {
         String requestBody = """
                 {
-                    "fullName": "New User",
+                    "full_name": "New User",
                     "email": "new@mail.com",
-                    "phoneNumber": "987654321",
+                    "phone_number": "987654321",
                     "password": "secret"
                 }
                 """;
@@ -225,9 +232,9 @@ class UserControllerTest {
     void shouldReturnUnauthorizedForCreateWhenNotAuthenticated() throws Exception {
         String requestBody = """
                 {
-                    "fullName": "New User",
+                    "full_name": "New User",
                     "email": "new@mail.com",
-                    "phoneNumber": "987654321",
+                    "phone_number": "987654321",
                     "password": "secret"
                 }
                 """;

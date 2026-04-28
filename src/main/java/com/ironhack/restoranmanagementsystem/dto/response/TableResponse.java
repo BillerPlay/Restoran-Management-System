@@ -1,9 +1,13 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TableResponse {
     private Long id;
+    @JsonProperty("table_number")
     private int tableNumber;
     private int capacity;
+    @JsonProperty("is_available")
     private Boolean isAvailable;
     public TableResponse(){}
 

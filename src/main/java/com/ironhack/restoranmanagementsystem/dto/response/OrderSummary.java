@@ -1,5 +1,6 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ironhack.restoranmanagementsystem.enums.OrderStatus;
 
 import java.math.BigDecimal;
@@ -8,9 +9,12 @@ import java.time.LocalDateTime;
 public class OrderSummary {
 
     private Long id;
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
+    @JsonProperty("total_price")
     private BigDecimal totalPrice;
     private OrderStatus status;
+    @JsonProperty("user_full_name")
     private String userFullName;
 
     public OrderSummary() {}

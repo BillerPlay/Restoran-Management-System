@@ -4,6 +4,8 @@ import com.ironhack.restoranmanagementsystem.config.SecurityConfig;
 import com.ironhack.restoranmanagementsystem.controller.AuthController;
 import com.ironhack.restoranmanagementsystem.entity.User;
 import com.ironhack.restoranmanagementsystem.enums.RoleName;
+import com.ironhack.restoranmanagementsystem.exception.CustomAccessDeniedHandler;
+import com.ironhack.restoranmanagementsystem.exception.CustomAuthenticationEntryPoint;
 import com.ironhack.restoranmanagementsystem.security.JwtTokenProvider;
 import com.ironhack.restoranmanagementsystem.service.AuthService;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AuthController.class)
-@Import(SecurityConfig.class)
+@Import({
+        SecurityConfig.class,
+        CustomAuthenticationEntryPoint.class,
+        CustomAccessDeniedHandler.class
+})
 class AuthControllerTest {
 
     @Autowired
@@ -49,10 +55,10 @@ class AuthControllerTest {
 
         String requestBody = """
                 {
-                    "fullName": "Test User",
+                    "full_name": "Test User",
                     "email": "test@mail.com",
-                    "password": "1234",
-                    "phoneNumber": "123456789"
+                    "password": "123456",
+                    "phone_number": "123456789"
                 }
                 """;
 
@@ -76,10 +82,10 @@ class AuthControllerTest {
 
         String requestBody = """
                 {
-                    "fullName": "Test User",
+                    "full_name": "Test User",
                     "email": "test@mail.com",
                     "password": "1234",
-                    "phoneNumber": "123456789"
+                    "phone_number": "123456789"
                 }
                 """;
 

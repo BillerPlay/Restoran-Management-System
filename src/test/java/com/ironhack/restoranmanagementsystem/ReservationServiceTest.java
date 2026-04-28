@@ -39,37 +39,41 @@ public class ReservationServiceTest {
     private Reservation reservation;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         user = new User();
         user.setId(1L);
+        user.setEmail("test@mail.com");
 
-        table=new RestaurantTable();
+        table = new RestaurantTable();
         table.setId(10L);
+        table.setCapacity(4);
+        table.setAvailable(true);
 
-        reservation=new Reservation();
+        reservation = new Reservation();
         reservation.setId(100L);
         reservation.setUser(user);
         reservation.setRestaurantTable(table);
         reservation.setStatus(ReservationStatus.PENDING);
     }
     @Test
-    void createReservation_Success(){
-        ReservationCreateRequest request=new ReservationCreateRequest();
+    void createReservation_Success() {
+        ReservationCreateRequest request = new ReservationCreateRequest();
         request.setRestaurantTableId(10L);
         request.setGuestCount(4);
         request.setReservationTime(LocalDateTime.now().plusDays(1));
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        when(restaurantTableRepository.findById(any())).thenReturn(Optional.of(table));
+        when(userRepository.findByEmail("test@mail.com")).thenReturn(Optional.of(user));
+        when(restaurantTableRepository.findById(10L)).thenReturn(Optional.of(table));
+        when(reservationRepository.existsByRestaurantTableIdAndReservationTimeAndStatusNot(any(), any(), any())).thenReturn(false);
         when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
-        ReservationResponse response=reservationService.createReservation(1L, request);
+        ReservationResponse response = reservationService.createReservation("test@mail.com", request);
         assertNotNull(response);
-        verify(reservationRepository,times(1)).save(any(Reservation.class));
+        verify(reservationRepository).save(any(Reservation.class));
     }
     @Test
-    void createReservation_UserNotFound_ThrowsException(){
-        when(userRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class,() ->
-                reservationService.createReservation(1L,new ReservationCreateRequest())
+    void createReservation_UserNotFound_ThrowsException() {
+        when(userRepository.findByEmail("test@mail.com")).thenReturn(Optional.empty());
+        assertThrows(Exception.class, () ->
+                reservationService.createReservation("test@mail.com", new ReservationCreateRequest())
         );
     }
     @Test
@@ -80,11 +84,11 @@ public class ReservationServiceTest {
         assertEquals(ReservationStatus.PENDING.name(),response.getStatus().name());
     }
     @Test
-    void cancelReservation_Success(){
+    void cancelReservation_Success() {
         when(reservationRepository.findById(100L)).thenReturn(Optional.of(reservation));
-        when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
-        ReservationResponse response=reservationService.cancelReservation(100L);
-        assertEquals(ReservationStatus.CANCELLED,reservation.getStatus());
+        when(reservationRepository.save(any())).thenReturn(reservation);
+        ReservationResponse response = reservationService.cancelReservation(100L, "test@mail.com", false);
+        assertEquals(ReservationStatus.CANCELLED, reservation.getStatus());
         verify(reservationRepository).save(reservation);
     }
     @Test

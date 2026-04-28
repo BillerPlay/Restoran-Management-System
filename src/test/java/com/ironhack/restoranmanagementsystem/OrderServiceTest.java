@@ -1,4 +1,4 @@
-package com.ironhack.restoranmanagementsystem.service;
+package com.ironhack.restoranmanagementsystem;
 
 import com.ironhack.restoranmanagementsystem.dto.request.OrderCreateRequest;
 import com.ironhack.restoranmanagementsystem.dto.request.OrderItemAddRequest;
@@ -16,6 +16,7 @@ import com.ironhack.restoranmanagementsystem.repository.OrderItemRepository;
 import com.ironhack.restoranmanagementsystem.repository.OrderRepository;
 import com.ironhack.restoranmanagementsystem.repository.ProductRepository;
 import com.ironhack.restoranmanagementsystem.repository.UserRepository;
+import com.ironhack.restoranmanagementsystem.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,5 +1,6 @@
 package com.ironhack.restoranmanagementsystem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ironhack.restoranmanagementsystem.enums.ReservationStatus;
 
 import java.time.LocalDate;
@@ -7,13 +8,20 @@ import java.time.LocalDateTime;
 
 public class ReservationResponse {
     private Long id;
+    @JsonProperty("reservation_time")
     private LocalDateTime reservationTime;
+    @JsonProperty("guest_count")
     private int guestCount;
     private ReservationStatus status;
+    @JsonProperty("created_at")
     private LocalDate createdAt;
+    @JsonProperty("user_id")
     private Long userId;
+    @JsonProperty("user_full_name")
     private String userFullName;
+    @JsonProperty("table_id")
     private Long tableId;
+    @JsonProperty("table_number")
     private int tableNumber;
 
     public Long getId() {
