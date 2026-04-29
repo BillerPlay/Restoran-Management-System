@@ -1,6 +1,7 @@
-package com.ironhack.restoranmanagementsystem.controller;
+package com.ironhack.restoranmanagementsystem;
 
 import com.ironhack.restoranmanagementsystem.config.SecurityConfig;
+import com.ironhack.restoranmanagementsystem.controller.ProductController;
 import com.ironhack.restoranmanagementsystem.dto.response.ProductResponse;
 import com.ironhack.restoranmanagementsystem.exception.CustomAccessDeniedHandler;
 import com.ironhack.restoranmanagementsystem.exception.CustomAuthenticationEntryPoint;
@@ -19,8 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
