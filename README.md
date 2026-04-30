@@ -137,7 +137,7 @@ restoran-management-system/
 **Base Path:** `/api/users`
 
 | Method | Endpoint | Description | Access |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | : :--- | :--- |
 | `GET` | `/me` | Get current user profile details | Authenticated |
 | `GET` | `/me/reservations` | Get current user's reservation list | Authenticated |
 | `GET` | `/me/orders` | Get current user's order history | Authenticated |
@@ -145,6 +145,7 @@ restoran-management-system/
 | `POST` | `/` | Create a new user manually | Admin |
 | `PUT` | `/{id}` | Update existing user details | Admin |
 | `DELETE` | `/{id}` | Remove a user from the system | Admin |
+
 ### 🍴 3. Category Controller
 **Base Path:** `/api/categories`
 
@@ -212,7 +213,33 @@ restoran-management-system/
 `Authorization: Bearer <your_jwt_token>`
 
 ---
+ 
+## 📖 Swagger UI
+ 
+Once the application is running, the interactive API documentation is available at:
+ 
+```
+http://localhost:8080/swagger-ui.html
+```
+ 
+To authorize in Swagger UI:
+1. Click the **Authorize 🔒** button
+2. Enter your JWT token in the format: `Bearer <your_token>`
+3. Click **Authorize** → **Close**
+---
+## 📬 Postman Collection
 
+You can test all API endpoints using the Postman collection:
+
+👉 [Open in Postman](https://documenter.getpostman.com/view/40790311/2sBXqJMMSF)
+
+### 🔑 How to use
+1. Import the collection into Postman
+2. Set the base URL: `http://localhost:8080`
+3. Register or login to get JWT token
+4. Add token to Authorization tab:
+   `Bearer <your_token>`
+---
 ## 🚀 Quick Start
 
 ### Prerequisites
