@@ -136,8 +136,8 @@ restoran-management-system/
 ### 👤 2. User Controller
 **Base Path:** `/api/users`
 
-| Method | Endpoint | Description | Access |
-| :--- | :--- | : :--- | :--- |
+| Method | Endpoint | Description | Access
+| :--- | :--- | :--- | :--- |             
 | `GET` | `/me` | Get current user profile details | Authenticated |
 | `GET` | `/me/reservations` | Get current user's reservation list | Authenticated |
 | `GET` | `/me/orders` | Get current user's order history | Authenticated |
