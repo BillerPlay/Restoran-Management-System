@@ -15,7 +15,11 @@ A complete, production-ready **Spring Boot 4** backend for the Restoran Manageme
 * **REST API:** Clean, structured endpoints for all operations.
 
 ---
+## 🗺️ Entity Relationship Diagram (ERD)
 
+![ER Diagram](docs/ERDiagram.png)
+
+---
 ## 🏗️ Technology Stack
 
 | Category | Technology |
@@ -137,7 +141,7 @@ restoran-management-system/
 **Base Path:** `/api/users`
 
 | Method | Endpoint | Description | Access |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | : :--- | :--- |
 | `GET` | `/me` | Get current user profile details | Authenticated |
 | `GET` | `/me/reservations` | Get current user's reservation list | Authenticated |
 | `GET` | `/me/orders` | Get current user's order history | Authenticated |
@@ -145,6 +149,7 @@ restoran-management-system/
 | `POST` | `/` | Create a new user manually | Admin |
 | `PUT` | `/{id}` | Update existing user details | Admin |
 | `DELETE` | `/{id}` | Remove a user from the system | Admin |
+
 ### 🍴 3. Category Controller
 **Base Path:** `/api/categories`
 
