@@ -15,7 +15,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Restoran Management System API")
+                        .title("Restaurant Management System API")
                         .version("1.0")
                         .description("Restaurant Management System REST API documentation"))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
