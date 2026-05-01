@@ -268,7 +268,7 @@ This is a **group project** developed collaboratively. To ensure efficient task 
 
 ### 📋 Project Management
 You can view our task organization and project progress on our board:
-* 🔗 **[Project Trello Board](https://trello.com/b/jvMud1nn/restaurant-management-system)**
+* 🔗 **[Project Trello Board](https://trello.com/invite/b/69ef631f062b36bc3009c4fa/ATTI2bfdbd904e75ef04d062a2e4f8e86da6C53ED419/restaurant-management-system)**
 
 ### 🛠️ Contributors
 The following individuals contributed to the development of this project:
