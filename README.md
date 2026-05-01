@@ -15,11 +15,7 @@ A complete, production-ready **Spring Boot 4** backend for the Restoran Manageme
 * **REST API:** Clean, structured endpoints for all operations.
 
 ---
-## 🗺️ Entity Relationship Diagram (ERD)
 
-![ER Diagram](docs/ERDiagram.png)
-
----
 ## 🏗️ Technology Stack
 
 | Category | Technology |
@@ -40,7 +36,6 @@ A complete, production-ready **Spring Boot 4** backend for the Restoran Manageme
 restoran-management-system/
 ├── src/main/java/com/ironhack/restoran/
 │   ├── 📁 config/
-│   │   ├── 📄 OpenApiConfig.java
 │   │   └── 📄 SecurityConfig.java                       
 │   ├── 📁 controller/
 │   │   ├── 📄 AuthController.java                       
@@ -141,8 +136,8 @@ restoran-management-system/
 ### 👤 2. User Controller
 **Base Path:** `/api/users`
 
-| Method | Endpoint | Description | Access
-| :--- | :--- | :--- | :--- |             
+| Method | Endpoint | Description | Access |
+| :--- | :--- | : :--- | :--- |
 | `GET` | `/me` | Get current user profile details | Authenticated |
 | `GET` | `/me/reservations` | Get current user's reservation list | Authenticated |
 | `GET` | `/me/orders` | Get current user's order history | Authenticated |
@@ -218,33 +213,7 @@ restoran-management-system/
 `Authorization: Bearer <your_jwt_token>`
 
 ---
- 
-## 📖 Swagger UI
- 
-Once the application is running, the interactive API documentation is available at:
- 
-```
-http://localhost:8080/swagger-ui.html
-```
- 
-To authorize in Swagger UI:
-1. Click the **Authorize 🔒** button
-2. Enter your JWT token in the format: `Bearer <your_token>`
-3. Click **Authorize** → **Close**
----
-## 📬 Postman Collection
 
-You can test all API endpoints using the Postman collection:
-
-👉 [Open in Postman](https://documenter.getpostman.com/view/40790311/2sBXqJMMSF)
-
-### 🔑 How to use
-1. Import the collection into Postman
-2. Set the base URL: `http://localhost:8080`
-3. Register or login to get JWT token
-4. Add token to Authorization tab:
-   `Bearer <your_token>`
----
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -283,7 +252,7 @@ Using Maven Wrapper
 
 [x] JWT-based authentication (Auth0 java-jwt)
 
-[x] Role-based access control with Spring Security 6 (ADMIN / CUSTOMER)
+[x] Role-based access control with Spring Security 6 (ADMIN / USER)
 
 [x] Spring Data JPA / Hibernate ORM
 
@@ -292,5 +261,22 @@ Using Maven Wrapper
 [x] Jakarta Validation for input integrity
 
 [x] 13 test classes covering Services, Controllers, and Security
+
+## 👥 Team Collaboration
+
+This is a **group project** developed collaboratively. To ensure efficient task tracking and organization, we managed the entire development process through **Trello**.
+
+### 📋 Project Management
+You can view our task organization and project progress on our board:
+* 🔗 **[Project Trello Board](https://trello.com/b/jvMud1nn/restaurant-management-system)**
+
+### 🛠️ Contributors
+The following individuals contributed to the development of this project:
+
+| Name | LinkedIn Profile |
+| :--- | :--- |
+| **Ali Safarli** | [🔗 Profile](https://www.linkedin.com/in/ali-safarli-7a01a7297/) |
+| **Revan Abushov** | [🔗 Profile](https://www.linkedin.com/in/revanabusov/) |
+| **Abdulvahab Alaskarli** | [🔗 Profile](https://www.linkedin.com/in/abdulvahhab-alaskarov-24b346150/?locale=ru) |
 
 ⭐ If you like this project, don't forget to give it a star!
