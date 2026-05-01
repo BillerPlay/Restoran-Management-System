@@ -273,10 +273,10 @@ You can view our task organization and project progress on our board:
 ### 🛠️ Contributors
 The following individuals contributed to the development of this project:
 
-| Name | LinkedIn Profile |
-| :--- | :--- |
-| **Ali Safarli** | [🔗 Profile](https://www.linkedin.com/in/ali-safarli-7a01a7297/) |
-| **Revan Abushov** | [🔗 Profile](https://www.linkedin.com/in/revanabusov/) |
-| **Abdulvahab Alaskarli** | [🔗 Profile](https://www.linkedin.com/in/abdulvahhab-alaskarov-24b346150/?locale=ru) |
+| Name                     | LinkedIn Profile |
+|:-------------------------| :--- |
+| **Ali Safarli**          | [🔗 Profile](https://www.linkedin.com/in/ali-safarli-7a01a7297/) |
+| **Revan Abushov**        | [🔗 Profile](https://www.linkedin.com/in/revanabusov/) |
+| **Abdulvahab Alaskarov** | [🔗 Profile](https://www.linkedin.com/in/abdulvahhab-alaskarov-24b346150/?locale=ru) |
 
 ⭐ If you like this project, don't forget to give it a star!
